@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serviceGroup>
+	<service name="SampleService" scope="application">
+		<description>
+			Sample Service
+    </description>
+		<!-- <module ref="logging" /> -->
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only"
+				class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+				class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</messageReceivers>
+		<parameter name="ServiceClass">
+			test.simple.webservice.samples.SampleService
+    </parameter>
+		<operation name="sayHiIn">
+			<messageReceiver
+				class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+		</operation>
+		<operation name="sayHiInOut" mep="http://www.w3.org/2004/08/wsdl/in-out" />
+	</service>
+
+	<service name="SampleService2">
+		<description>This is a test to check how service group works
+		</description>
+		<parameter name="ServiceClass">test.simple.webservice.samples.WebService2
+		</parameter>
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only"
+				class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+				class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</messageReceivers>
+	</service>
+	<service name="SoapSessionService" scope="soapsession">
+		<!-- <module ref="logging" /> -->
+		<parameter name="ServiceClass">test.simple.webservice.samples.SoapSessionService
+		</parameter>
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only"
+				class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+				class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</messageReceivers>
+	</service>
+
+	<service name="TransportSessionService" scope="transportsession">
+		<!-- <module ref="logging" /> -->
+		<parameter name="ServiceClass">test.simple.webservice.samples.SoapSessionService
+		</parameter>
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only"
+				class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+				class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</messageReceivers>
+	</service>
+
+	<service name="AddNewRuntimeWebService">
+		<!-- <module ref="logging" /> -->
+		<parameter name="ServiceClass">test.simple.webservice.samples.AddNewRuntimeWebService
+		</parameter>
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only"
+				class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+				class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</messageReceivers>
+	</service>
+	
+	<service name="SampleAsyncWebService">
+		<!-- <module ref="logging" /> -->
+		<module ref="addressing" />
+		<parameter name="ServiceClass">test.simple.webservice.samples.SampleAsyncWebService
+		</parameter>
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-only"
+				class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out" 
+				class="org.apache.axis2.receivers.RawXMLINOutAsyncMessageReceiver"/>
+		</messageReceivers>
+	</service>
+</serviceGroup>

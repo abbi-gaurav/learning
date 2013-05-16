@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite skipped="0" tests="1" failures="0" errors="0" name="test.simple.handler.TestLogHandlerWithMockito" time="0.689">
+  <properties>
+    <property value="IBM Corporation" name="java.vendor"/>
+    <property value="SUN_STANDARD" name="sun.java.launcher"/>
+    <property value="Linux" name="os.name"/>
+    <property value="/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/amd64/default/jclSC170/vm.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/se-service.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/math.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/jlm.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/ibmorb.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/ibmorbapi.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/ibmcfw.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/ibmpkcs.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/ibmcertpathfw.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/ibmjgssfw.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/ibmjssefw.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/ibmsaslfw.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/ibmjcefw.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/ibmjgssprovider.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/ibmjsseprovider2.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/ibmcertpathprovider.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/xmldsigfw.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/xml.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/charsets.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/resources.jar:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/rt.jar" name="sun.boot.class.path"/>
+    <property value="gnome" name="sun.desktop"/>
+    <property value="Sun Microsystems Inc." name="java.vm.specification.vendor"/>
+    <property value="pxa6470sr1-20120330_01 (SR1)" name="java.runtime.version"/>
+    <property value="gaurav_abbi" name="user.name"/>
+    <property value="j9jit26" name="java.compiler"/>
+    <property value="UTF-8" name="os.encoding"/>
+    <property value="true" name="guice.disable.misplaced.annotation.check"/>
+    <property value="" name="com.ibm.util.extralibs.properties"/>
+    <property value="" name="com.ibm.jcl.checkClassPath"/>
+    <property value="en" name="user.language"/>
+    <property value="/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/amd64/default:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/amd64" name="com.ibm.oti.vm.bootstrap.library.path"/>
+    <property value="/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/amd64/default:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/amd64" name="sun.boot.library.path"/>
+    <property value="/home/gaurav_abbi/learning/workspace/.metadata/.plugins/org.eclipse.m2e.core/launches/m2conf7077675000062858145.tmp" name="classworlds.conf"/>
+    <property value="1.7.0" name="java.version"/>
+    <property value="Asia/Calcutta" name="user.timezone"/>
+    <property value="/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/amd64" name="com.ibm.system.agent.path"/>
+    <property value="64" name="sun.arch.data.model"/>
+    <property value="2" name="com.ibm.zero.version"/>
+    <property value="/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/endorsed" name="java.endorsed.dirs"/>
+    <property value="26" name="com.ibm.oti.vm.library.version"/>
+    <property value="UTF-8" name="sun.jnu.encoding"/>
+    <property value="sun.io" name="file.encoding.pkg"/>
+    <property value="17" name="jxe.current.romimage.version"/>
+    <property value="/" name="file.separator"/>
+    <property value="Java Platform API Specification" name="java.specification.name"/>
+    <property value="51.0" name="java.class.version"/>
+    <property value="US" name="user.country"/>
+    <property value="file:/dev/./urandom" name="securerandom.source"/>
+    <property value="/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre" name="java.home"/>
+    <property value="JRE 1.7.0 Linux amd64-64 20120322_106209 (JIT enabled, AOT enabled)
+J9VM - R26_Java726_SR1_20120322_1720_B106209
+JIT  - r11_20120322_22976
+GC   - R26_Java726_SR1_20120322_1720_B106209
+J9CL - 20120322_106209" name="java.vm.info"/>
+    <property value="2.6.32-279.19.1.el6.x86_64" name="os.version"/>
+    <property value="" name="java.awt.fonts"/>
+    <property value=":" name="path.separator"/>
+    <property value="2.6" name="java.vm.version"/>
+    <property value="java.util.prefs.FileSystemPreferencesFactory" name="java.util.prefs.PreferencesFactory"/>
+    <property value="" name="user.variant"/>
+    <property value="sun.print.PSPrinterJob" name="java.awt.printerjob"/>
+    <property value="UnicodeLittle" name="sun.io.unicode.encoding"/>
+    <property value="sun.awt.X11.XToolkit" name="awt.toolkit"/>
+    <property value="true" name="ibm.signalhandling.sigint"/>
+    <property value="/home/gaurav_abbi" name="user.home"/>
+    <property value="little" name="com.ibm.cpu.endian"/>
+    <property value="Sun Microsystems Inc." name="java.specification.vendor"/>
+    <property value="true" name="ibm.signalhandling.sigchain"/>
+    <property value="/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/amd64/default:/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/amd64:/usr/lib" name="java.library.path"/>
+    <property value="http://www.ibm.com/" name="java.vendor.url"/>
+    <property value="IBM Corporation" name="java.vm.vendor"/>
+    <property value="JRE 1.7.0 IBM J9 2.6 Linux amd64-64 20120322_106209 (JIT enabled, AOT enabled)
+J9VM - R26_Java726_SR1_20120322_1720_B106209
+JIT  - r11_20120322_22976
+GC   - R26_Java726_SR1_20120322_1720_B106209
+J9CL - 20120322_106209" name="java.fullversion"/>
+    <property value="/home/gaurav_abbi/learning/projects/my-handler/EMBEDDED" name="maven.home"/>
+    <property value="Java(TM) SE Runtime Environment" name="java.runtime.name"/>
+    <property value="org.codehaus.plexus.classworlds.launcher.Launcher -B -s /home/gaurav_abbi/openSrcMavenRepo/openSrcMavenSettings.xml install" name="sun.java.command"/>
+    <property value="/home/gaurav_abbi/ide/eclipseJuno/configuration/org.eclipse.osgi/bundles/236/1/.cp/jars/plexus-classworlds-2.4.jar" name="java.class.path"/>
+    <property value="Java Virtual Machine Specification" name="java.vm.specification.name"/>
+    <property value="1052" name="sun.java.launcher.pid"/>
+    <property value="1.0" name="java.vm.specification.version"/>
+    <property value="little" name="sun.cpu.endian"/>
+    <property value="/tmp" name="java.io.tmpdir"/>
+    <property value="UTF-8" name="ibm.system.encoding"/>
+    <property value="amd64" name="os.arch"/>
+    <property value="sun.awt.X11GraphicsEnvironment" name="java.awt.graphicsenv"/>
+    <property value="false" name="ibm.signalhandling.rs"/>
+    <property value="/home/gaurav_abbi/softwares/ibm-java-x86_64-70/jre/lib/ext" name="java.ext.dirs"/>
+    <property value="/home/gaurav_abbi/learning/projects/my-handler" name="user.dir"/>
+    <property value="
+" name="line.separator"/>
+    <property value="IBM J9 VM" name="java.vm.name"/>
+    <property value="false" name="com.ibm.oti.shared.enabled"/>
+    <property value="64" name="com.ibm.vm.bitmode"/>
+    <property value="17" name="jxe.lowest.romimage.version"/>
+    <property value="UTF-8" name="file.encoding"/>
+    <property value="scar" name="com.ibm.oti.configuration"/>
+    <property value="1.7" name="java.specification.version"/>
+    <property value="20120322_106209" name="com.ibm.oti.jcl.build"/>
+  </properties>
+  <testcase classname="test.simple.handler.TestLogHandlerWithMockito" name="testHandle" time="0.63"/>
+</testsuite>

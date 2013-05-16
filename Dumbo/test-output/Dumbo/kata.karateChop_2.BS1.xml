@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite hostname="gauravabbi-laptop" name="kata.karateChop_2.BS1" tests="1" failures="0" timestamp="16 Aug 2011 05:12:44 GMT" time="0.023" errors="0">
+  <testcase name="testBS" time="0.006" classname="kata.karateChop_2.BS1"/>
+</testsuite>

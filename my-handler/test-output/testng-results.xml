@@ -1,0 +1,16 @@
+<testng-results>
+  <reporter-output>
+  </reporter-output>
+  <suite name="my-handler" duration-ms="648" started-at="2011-08-18T17:13:52Z" finished-at="2011-08-18T17:13:53Z">
+    <groups>
+    </groups>
+    <test name="test.simple.handler.TestLogHandlerWithMockito" duration-ms="648" started-at="2011-08-18T17:13:52Z" finished-at="2011-08-18T17:13:53Z">
+      <class name="test.simple.handler.TestLogHandlerWithMockito">
+        <test-method status="PASS" signature="setup()" name="setup" is-config="true" duration-ms="515" started-at="2011-08-18T17:13:52Z" finished-at="2011-08-18T17:13:53Z">
+        </test-method>
+        <test-method status="PASS" signature="testHandle()" name="testHandle" duration-ms="104" started-at="2011-08-18T17:13:53Z" finished-at="2011-08-18T17:13:53Z">
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>

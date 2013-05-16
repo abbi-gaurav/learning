@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="5" configfailurepolicy="skip" verbose="1" name="Failed suite [Dumbo]" skipfailedinvocationcounts="false" parallel="false" annotations="JDK" data-provider-thread-count="10">
+  <test verbose="1" name="kata.karateChop_2.BS1(failed)" junit="false" parallel="false" annotations="JDK">
+    <classes>
+      <class name="kata.karateChop_2.BS1">
+        <methods>
+          <include name="testBS" invocation-numbers="0"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

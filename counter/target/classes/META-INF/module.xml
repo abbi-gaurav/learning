@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="counterModule" class="module.CounterModule">
+	<InFlow>
+		<handler name="IncomingMsgCounterHandler" class="handlers.IncomingCounterHandler">
+			<order phase="Transport" after="RequestURIBasedDispatcher" before="SOAPActionBasedDispatcher"></order>
+		</handler>
+	</InFlow>	
+	
+	<OutFlow>
+		<handler name="OutgoingMsgCounterHandler" class="handlers.OutgoingCounterHandler">
+			<order phase="MessageOut" after="RequestURIBasedDispatcher" before="SOAPActionBasedDispatcher"></order>
+		</handler>
+	</OutFlow>
+	
+	<InFaultFlow>
+		<handler name="IncomingMsgCounterHandler" class="handlers.IncomingCounterHandler">
+			<order phase="Dispatch" after="RequestURIBasedDispatcher" before="SOAPActionBasedDispatcher"></order>
+		</handler>
+	</InFaultFlow>
+	
+	<OutFaultFlow>
+		<handler name="OutgoingMsgCounterHandler" class="handlers.OutgoingCounterHandler">
+			<order phase="MessageOut"/>
+		</handler>
+	</OutFaultFlow>
+	
+</module>

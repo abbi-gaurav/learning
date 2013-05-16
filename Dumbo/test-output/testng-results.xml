@@ -1,0 +1,21 @@
+<testng-results>
+  <reporter-output>
+  </reporter-output>
+  <suite name="Dumbo" duration-ms="23" started-at="2011-08-16T10:42:44Z" finished-at="2011-08-16T10:42:44Z">
+    <groups>
+    </groups>
+    <test name="kata.karateChop_2.BS1" duration-ms="23" started-at="2011-08-16T10:42:44Z" finished-at="2011-08-16T10:42:44Z">
+      <class name="kata.karateChop_2.BS1">
+        <test-method status="PASS" signature="testBS(int)" name="testBS" duration-ms="6" started-at="2011-08-16T10:42:44Z" finished-at="2011-08-16T10:42:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[8377]]>
+              </value>
+            </param>
+          </params>
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>

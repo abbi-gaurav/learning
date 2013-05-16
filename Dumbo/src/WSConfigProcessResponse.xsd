@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="unqualified"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.ibm.com/b2b/apiint/messagedefinitions/messages/xml/wsConfigProcessResponse"
+	xmlns="http://www.ibm.com/b2b/apiint/messagedefinitions/messages/xml/wsConfigProcessResponse"
+	xmlns:baseConfig="http://www.ibm.com/b2b/apiint/messagedefinitions/messages/xml/baseWSConfig">
+
+	<xs:import schemaLocation="BaseWSConfig.xsd"
+		namespace="http://www.ibm.com/b2b/apiint/messagedefinitions/messages/xml/baseWSConfig" />
+		
+	<xs:element name="WSConfiguration" type="WSConfigurationType" />
+	<xs:complexType name="WSConfigurationType">
+		<xs:complexContent>
+			<xs:extension base="baseConfig:BaseWSConfig">
+				<xs:sequence>
+					<xs:element type="StatusType" name="Status" />
+					<xs:element type="xs:string" name="wsdlURL" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:simpleType name="StatusType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CREATED" />
+			<xs:enumeration value="UPDATED" />
+			<xs:enumeration value="DELETED" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

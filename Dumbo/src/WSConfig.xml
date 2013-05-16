@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WSConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="WSConfigProcessRequest.xsd">
+	<Name>SampleWebService</Name>
+	<PID>WS</PID>
+	<RID></RID>
+	<wsdlxml><![CDATA[<wsdl></wsdl>]]></wsdlxml>
+</WSConfiguration>

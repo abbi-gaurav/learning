@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://samples.webservice.simple.test" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://samples.webservice.simple.test">
+    <wsdl:documentation>SampleService</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://samples.webservice.simple.test">
+            <xs:element name="sayHiInOutadd">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="x" type="xs:int"/>
+                        <xs:element minOccurs="0" name="f" type="xs:float"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sayHiInOutaddResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:float"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sayHiInOut">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="input" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sayHiInOutResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sayHiIn">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="input" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sayHi">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="sayHiRequest">
+        <wsdl:part name="parameters" element="ns:sayHi"/>
+    </wsdl:message>
+    <wsdl:message name="sayHiInRequest">
+        <wsdl:part name="parameters" element="ns:sayHiIn"/>
+    </wsdl:message>
+    <wsdl:message name="sayHiInResponse"/>
+    <wsdl:message name="sayHiInOutRequest">
+        <wsdl:part name="parameters" element="ns:sayHiInOut"/>
+    </wsdl:message>
+    <wsdl:message name="sayHiInOutResponse">
+        <wsdl:part name="parameters" element="ns:sayHiInOutResponse"/>
+    </wsdl:message>
+    <wsdl:message name="sayHiInOutaddRequest">
+        <wsdl:part name="parameters" element="ns:sayHiInOutadd"/>
+    </wsdl:message>
+    <wsdl:message name="sayHiInOutaddResponse">
+        <wsdl:part name="parameters" element="ns:sayHiInOutaddResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="SampleServicePortType">
+        <wsdl:operation name="sayHi">
+            <wsdl:input message="ns:sayHiRequest" wsaw:Action="urn:sayHi"/>
+        </wsdl:operation>
+        <wsdl:operation name="sayHiIn">
+            <wsdl:input message="ns:sayHiInRequest" wsaw:Action="urn:sayHiIn"/>
+            <wsdl:output message="ns:sayHiInResponse" wsaw:Action="urn:sayHiInResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="sayHiInOut">
+            <wsdl:input message="ns:sayHiInOutRequest" wsaw:Action="urn:sayHiInOut"/>
+            <wsdl:output message="ns:sayHiInOutResponse" wsaw:Action="urn:sayHiInOutResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="sayHiInOutadd">
+            <wsdl:input message="ns:sayHiInOutaddRequest" wsaw:Action="urn:sayHiInOutadd"/>
+            <wsdl:output message="ns:sayHiInOutaddResponse" wsaw:Action="urn:sayHiInOutaddResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SampleServiceSoap11Binding" type="ns:SampleServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="sayHi">
+            <soap:operation soapAction="urn:sayHi" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="sayHiIn">
+            <soap:operation soapAction="urn:sayHiIn" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sayHiInOutadd">
+            <soap:operation soapAction="urn:sayHiInOutadd" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sayHiInOut">
+            <soap:operation soapAction="urn:sayHiInOut" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="SampleServiceSoap12Binding" type="ns:SampleServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="sayHi">
+            <soap12:operation soapAction="urn:sayHi" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="sayHiIn">
+            <soap12:operation soapAction="urn:sayHiIn" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sayHiInOutadd">
+            <soap12:operation soapAction="urn:sayHiInOutadd" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sayHiInOut">
+            <soap12:operation soapAction="urn:sayHiInOut" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="SampleServiceHttpBinding" type="ns:SampleServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="sayHi">
+            <http:operation location="sayHi"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+        </wsdl:operation>
+        <wsdl:operation name="sayHiIn">
+            <http:operation location="sayHiIn"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sayHiInOutadd">
+            <http:operation location="sayHiInOutadd"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sayHiInOut">
+            <http:operation location="sayHiInOut"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SampleService">
+        <wsdl:port name="SampleServiceJmsSoap11Endpoint" binding="ns:SampleServiceSoap11Binding">
+            <soap:address location="jms:/SampleService?transport.jms.DestinationType=queue&amp;transport.jms.ContentTypeProperty=Content-Type&amp;java.naming.provider.url=tcp://localhost:61616&amp;java.naming.factory.initial=org.apache.activemq.jndi.ActiveMQInitialContextFactory&amp;transport.jms.DefaultReplyDestinationType=queue&amp;transport.jms.DefaultReplyDestination=dymanicQueues/JMSClientReply&amp;transport.jms.ConnectionFactoryJNDIName=QueueConnectionFactory"/>
+        </wsdl:port>
+        <wsdl:port name="SampleServiceHttpSoap11Endpoint" binding="ns:SampleServiceSoap11Binding">
+            <soap:address location="http://localhost:25000/axis2/services/SampleService.SampleServiceHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="SampleServiceJmsSoap12Endpoint" binding="ns:SampleServiceSoap12Binding">
+            <soap12:address location="jms:/SampleService?transport.jms.DestinationType=queue&amp;transport.jms.ContentTypeProperty=Content-Type&amp;java.naming.provider.url=tcp://localhost:61616&amp;java.naming.factory.initial=org.apache.activemq.jndi.ActiveMQInitialContextFactory&amp;transport.jms.DefaultReplyDestinationType=queue&amp;transport.jms.DefaultReplyDestination=dymanicQueues/JMSClientReply&amp;transport.jms.ConnectionFactoryJNDIName=QueueConnectionFactory"/>
+        </wsdl:port>
+        <wsdl:port name="SampleServiceHttpSoap12Endpoint" binding="ns:SampleServiceSoap12Binding">
+            <soap12:address location="http://localhost:25000/axis2/services/SampleService.SampleServiceHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="SampleServiceHttpEndpoint" binding="ns:SampleServiceHttpBinding">
+            <http:address location="http://localhost:25000/axis2/services/SampleService.SampleServiceHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

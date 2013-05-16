@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns:books xmlns:ns="axis2" type="learnAxiom">
+	<ns:isbn>1234567</ns:isbn>
+</ns:books>

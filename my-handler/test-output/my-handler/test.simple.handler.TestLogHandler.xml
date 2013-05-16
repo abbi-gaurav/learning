@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite hostname="gauravabbi-laptop" name="test.simple.handler.TestLogHandler" tests="1" failures="0" timestamp="18 Aug 2011 08:10:17 GMT" time="0.536" errors="0">
+  <testcase name="testHandle" time="0.083" classname="test.simple.handler.TestLogHandler"/>
+</testsuite>

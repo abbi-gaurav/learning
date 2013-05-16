@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.ibm.com/b2b/apiint/messagedefinitions/messages/xml/baseWSConfig"
+    xmlns="http://www.ibm.com/b2b/apiint/messagedefinitions/messages/xml/baseWSConfig"
+	elementFormDefault="qualified">
+	<xs:complexType name="BaseWSConfig">
+		<xs:sequence>
+			<xs:element type="xs:string" name="Name" />
+			<xs:element type="xs:string" name="PID" />
+			<xs:element type="xs:string" name="RID" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

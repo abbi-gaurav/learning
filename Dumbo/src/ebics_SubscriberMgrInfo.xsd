@@ -1,0 +1,909 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--	version: 		1.1
+		last updated on:07/04/2009	 -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.sterlingcommerce.com/ebics/SubscriberMgrInfo"
+	xmlns="http://www.sterlingcommerce.com/ebics/SubscriberMgrInfo"
+	elementFormDefault="qualified">
+	<xsd:element name="SubscriberMgrInfo">
+		<xsd:annotation>
+			<xsd:documentation>This is the root element for the Subscription 
+Manager Information. Using the information insIde this root element, 
+different components of subscription manager can be imported or exported.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="OrderTypes" minOccurs="0" maxOccurs="1" />
+				<xsd:element name="Profiles" type="ebicsProfiles"
+					minOccurs="0" maxOccurs="1" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="ebicsProfiles">
+		<xsd:sequence>
+			<xsd:element ref="PartnerInfo" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element ref="HostInfo" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element ref="UserInfo" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="HostInfo">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="HostProtocolInfo" type="HostProtocol"
+					minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element name="HostUrlInfo" type="HostUrl"
+					minOccurs="0" maxOccurs="unbounded" />
+				<xsd:element name="Offer" type="OfferInfo" minOccurs="0"
+					maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="HostId" type="hostId" use="required" />
+			<xsd:attribute name="Operation" type="importFunctions" />
+			<!--
+				use this attribute along with Operation="Delete" to delete full
+				profile.
+			-->
+			<xsd:attributeGroup ref="deleteFullAttrGrp" />
+			<xsd:attribute name="EncrPrivKeyName" type="xsd:string"
+				use="optional" />
+			<xsd:attribute name="EncrPubKeyName" type="xsd:string"
+				use="optional" />
+			<xsd:attribute name="AuthPrivKeyName" type="xsd:string"
+				use="optional" />
+			<xsd:attribute name="AuthPubKeyName" type="xsd:string"
+				use="optional" />
+			<xsd:attribute name="EsPrivKeyName" type="xsd:string"
+				use="optional" />
+			<xsd:attribute name="EsPubKeyName" type="xsd:string"
+				use="optional" />
+			<xsd:attribute name="MaxRecoveryNum" use="optional"
+				type="string11" />
+			<xsd:attribute name="Prevalidate" use="optional" type="BooleanStr" />
+			<xsd:attribute name="X509Support" use="optional" type="BooleanStr" />
+			<xsd:attribute name="X509Persist" use="optional" type="BooleanStr" />
+			<xsd:attribute name="ClntDlSupport" use="optional"
+				type="BooleanStr" />
+			<xsd:attribute name="DlOdSupport" use="optional" type="BooleanStr" />
+			<xsd:attributeGroup ref="BasicInfo" />
+			
+			<!-- for export only -->
+			<xsd:attribute name="PartnerId" type="string35" />
+			<xsd:attribute name="UserId" type="string35" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="HostVer">
+		<xsd:attribute name="VerType" type="VerStr" use="required" />
+		<xsd:attribute name="VerValue" type="string10" use="optional" />
+		<xsd:attributeGroup ref="DoDelete" />
+	</xsd:complexType>
+	<xsd:complexType name="HostUrl">
+		<xsd:attribute name="HostUrl" type="string255" use="required" />
+		<xsd:attribute name="UrlValidFrom" type="xsd:dateTime"
+			use="optional" />
+		<xsd:attributeGroup ref="DoDelete" />
+	</xsd:complexType>
+	<xsd:element name="Partners">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="PartnerInfo" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="Offers">
+		<xsd:sequence>
+			<xsd:element name="Offer" minOccurs="1" maxOccurs="unbounded"
+				type="OfferInfo" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="OfferInfo">
+		<xsd:sequence>
+			<xsd:element name="OfferOrdInfo" type="OfferOrd"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element ref="OfferPartner" minOccurs="0" maxOccurs="unbounded" />
+			<!-- PartnerInfo element will only come for export output. -->
+			<xsd:element ref="PartnerInfo" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="OfferName" type="xsd:string" use="required" />
+		<xsd:attributeGroup ref="DoDelete" />
+	</xsd:complexType>
+	<xsd:element name="OfferPartner">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="PartnerOrd" type="PartnerOrdType"
+					minOccurs="0" maxOccurs="unbounded">
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:attribute name="PartnerId" type="string35" use="required" />
+			<xsd:attributeGroup ref="DoDelete" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="OfferOrd">
+		<xsd:attributeGroup ref="OrderAtt" />
+		<xsd:attribute name="NumSigReqd" type="xsd:string" use="optional" />
+		<xsd:attribute name="AuthLevel" type="AuthLevelType"
+			use="optional" />
+		<xsd:attribute name="PostProcessBp" type="xsd:string"
+			use="optional" />
+		<xsd:attributeGroup ref="DoDelete" />
+	</xsd:complexType>
+	<xsd:complexType name="OrderType">
+		<xsd:sequence>
+			<xsd:element name="Format" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:attribute name="FileFormat" type="string50" use="required" />
+					<xsd:attributeGroup ref="DoDelete" />
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<!-- OrdType is mandatory during import, during export it is optional-->
+		<xsd:attribute name="OrdType" type="string3" use="optional" />
+		<xsd:attribute name="Operation" type="importOTFunctions" />
+		<xsd:attribute name="ProtocolVer" type="string4" use="required" />
+	</xsd:complexType>
+	<xsd:element name="PartnerInfo">
+		<xsd:complexType>
+			<xsd:sequence>
+					<!--  only for export output-->
+				<xsd:element ref="OrderTypes" minOccurs="0" maxOccurs="1" />
+				<xsd:element name="Users" minOccurs="0" maxOccurs="1">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element ref="UserInfo" minOccurs="0" maxOccurs="unbounded" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<!-- only while exporting output-->
+				<xsd:element name="PartnerOrd" type="PartnerOrdType"
+					minOccurs="0" maxOccurs="unbounded" />
+				<!--  only for export ends here -->
+				<xsd:element ref="AccountInfo" maxOccurs="unbounded"
+					minOccurs="0" />
+			</xsd:sequence>
+			<xsd:attribute name="PartnerId" type="string35" use="required" />
+			<xsd:attribute name="OrgCode" type="string24" use="optional" />
+			<xsd:attribute name="Operation" type="importFunctions" />
+			<!--
+				use this attribute along with Operation="Delete" to delete full
+				profile.
+			-->
+			<xsd:attributeGroup ref="deleteFullAttrGrp" />
+			<xsd:attributeGroup ref="BasicInfo" />
+			<!--  only for export purpose-->
+			<xsd:attribute name="UserId" type="string35" use="optional" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="UserInfo">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="AddToPartner" minOccurs="0"
+					maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>This element corresponds to User 
+Partner relationship (EB_PTNER_USER table) where a user 
+can be added to a partner.
+</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<!--
+								This element contains the information about the user public
+								keys. A user can have three keys of types
+								E(Encryption),S(Signature verification) and A(Authentication and
+								Identification)
+							-->
+							<xsd:element name="UserKey" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:attribute name="KeyName" type="string255"
+										use="optional" />
+									<xsd:attribute name="KeyType" type="UserKeyType"
+										use="required" />
+									<xsd:attributeGroup ref="DoDelete" />
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="UserPerm" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<!--
+											A partner can have a number of accounts associated with it.
+											When providing/assigning user permissions, we need to provide
+											the information about the partner's account which this user
+											can use. The Account id should be the account which is
+											associated with the partner for which this user has been
+											configured.
+										-->
+										<xsd:element name="PtnerUserAcct" minOccurs="0"
+											maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:attribute name="AcctId" type="string64"
+													use="required" />
+												<xsd:attributeGroup ref="DoDelete" />
+											</xsd:complexType>
+										</xsd:element>
+										<!-- only for export -->
+										<xsd:element ref="AccountInfo" minOccurs="0"
+											maxOccurs="unbounded" />
+									</xsd:sequence>
+									<xsd:attribute name="AuthLevel" type="AuthLevelType"
+										use="optional" />
+									<xsd:attribute name="MaxAmt" type="string15" use="optional" />
+									<xsd:attribute name="Curr" type="string3" use="optional" />
+									<xsd:attributeGroup ref="OrderAtt" />
+									<xsd:attribute name="HostId" type="hostId" />
+									<xsd:attributeGroup ref="DoDelete" />
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+						<xsd:attribute name="Status" type="StatusType" use="optional" />
+						<xsd:attribute name="UlMbxPath" type="string255"
+							use="optional" />
+						<xsd:attribute name="DlMbxPath" type="string255"
+							use="optional" />
+						<xsd:attribute name="DlArchMbxPath" type="string255"
+							use="optional" />
+                        
+							<!-- existing partner id in system -->
+						<xsd:attribute name="PartnerId" type="string35" use="required" />
+						<xsd:attributeGroup ref="DoDelete" />
+					</xsd:complexType>
+				</xsd:element>
+				
+				<!--  only for export output data  -->
+				<xsd:element ref="OrderTypes" minOccurs="0" maxOccurs="1">
+					<xsd:annotation>
+						<xsd:documentation>This element corresponds to various 
+order types that this user can use to do 
+transactions with the EBICS server. it is a subset of the orders which a partner, to which the user belong, can use</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:attribute name="UserId" type="string35" use="required" />
+			<xsd:attributeGroup ref="BasicInfo" />
+			<xsd:attribute name="Operation" type="importFunctions"
+				use="optional" />
+			<!--
+				use this attribute along with Operation="Delete" to delete full
+				profile.
+			-->
+			<xsd:attributeGroup ref="deleteFullAttrGrp" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="importFunctions">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Create" />
+			<xsd:enumeration value="Modify" />
+			<xsd:enumeration value="Delete" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="importOTFunctions">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Modify" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="key">
+		<xsd:attribute name="certificateName" type="string255"
+			use="required" />
+	</xsd:complexType>
+	<xsd:simpleType name="certType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Trusted" />
+			<xsd:enumeration value="System" />
+			<xsd:enumeration value="CACert" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="AccountInfo">
+		<xsd:complexType>
+			<xsd:sequence>
+			</xsd:sequence>
+			<xsd:attribute name="AcctId" use="required" type="string64" />
+			<xsd:attribute name="BankCode" type="bankCode" use="optional" />
+			<xsd:attribute name="AcctNum" type="accountNum" use="optional" />
+			<xsd:attribute name="AcctName" use="optional" type="string100" />
+			<xsd:attribute name="AcctCurr" use="optional" type="string3" />
+			<xsd:attribute name="AcctIntl" type="BooleanStr" use="optional" />
+			<xsd:attribute name="BankCodeIntl" type="BooleanStr"
+				use="optional" />
+			<xsd:attribute name="BankCodePrefix" type="string2"
+				use="optional" />
+			<xsd:attribute name="NtlAcctNum" type="string40" use="optional" />
+			<xsd:attribute name="NtlAcctFormat" type="string100"
+				use="optional" />
+			<xsd:attribute name="NtlBkCode" type="string30" use="optional" />
+			<xsd:attribute name="NtlBkFormat" type="string100" use="optional" />
+			<xsd:attribute name="AcctDescr" type="string255" use="optional" />
+			<xsd:attributeGroup ref="DoDelete" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="OrderTypes">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="FileFormatInfo" minOccurs="0"
+					maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:attribute name="CountryCode" type="CountryType"
+							use="optional" />
+						<xsd:attribute name="FileFormat" type="string50"
+							use="optional" />
+						<xsd:attribute name="Operation" type="importFunctions" />
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="OrdTypeInfo" type="OrderType"
+					minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<!-- only for export -->
+			<xsd:attribute name="OrdType" type="string3" use="optional" />
+			<xsd:attribute name="ProtocolVer" type="string4" use="optional" />
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:simpleType name="BooleanStr">
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="1" />
+			<xsd:enumeration value="T" />
+			<xsd:enumeration value="F" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="VerStr">
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="1" />
+			<xsd:enumeration value="A" />
+			<xsd:enumeration value="E" />
+			<xsd:enumeration value="S" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:attributeGroup name="BasicInfo">
+		<xsd:attribute name="FirstName" type="string64" use="optional" />
+		<xsd:attribute name="AddressLine1" type="string70" use="optional" />
+		<xsd:attribute name="AddressLine2" type="string70" use="optional" />
+		<xsd:attribute name="City" type="string35Base" use="optional" />
+		<xsd:attribute name="State" type="string35Base" use="optional" />
+		<xsd:attribute name="ZipCode" type="string35Base" use="optional" />
+		<xsd:attribute name="DayPhone" type="string40" use="optional" />
+		<xsd:attribute name="Country" type="CountryType" use="optional" />
+		<xsd:attribute name="TimeZone" type="TimeZoneType" use="optional" />
+		<xsd:attribute name="EmailId" type="emailType" use="optional" />
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="OrderAtt">
+		<xsd:attribute name="OrdType" type="string3" use="required" />
+		<xsd:attribute name="FileFormat" type="string50" use="optional" />
+		<xsd:attribute name="ProtocolVer" type="string4" use="required" />
+	</xsd:attributeGroup>
+	<xsd:simpleType name="UserKeyType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="E" />
+			<xsd:enumeration value="A" />
+			<xsd:enumeration value="S" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="HostProtocol">
+		<xsd:sequence>
+			<xsd:element name="HostVerInfo" type="HostVer" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="ProtocolValue" type="string10" use="required" />
+		<xsd:attribute name="ReleaseVer" type="string10" use="optional" />
+		<xsd:attributeGroup ref="DoDelete" />
+	</xsd:complexType>
+	<xsd:complexType name="PartnerOrdType">
+		<xsd:attribute name="NumSigReqd" type="string10" use="optional" />
+		<xsd:attributeGroup ref="OrderAtt" />
+		<xsd:attribute name="PostProcessBp" type="string255"
+			use="optional" />
+		<xsd:attributeGroup ref="DoDelete" />
+	</xsd:complexType>
+	<xsd:simpleType name="string2">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="2" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:attributeGroup name="DoDelete">
+		<xsd:attribute name="doDelete" type="BooleanStr" use="optional"
+			default="F" />
+	</xsd:attributeGroup>
+	<xsd:simpleType name="string35">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="35" />
+			<xsd:pattern value="[a-zA-Z0-9,=]{1,35}" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string255">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="255" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string100">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="100" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string1">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="1" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string10">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="10" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string4">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="4" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string50">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="50" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string3">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="3" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string64">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="64" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string40">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="40" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string30">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="30" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string5">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="5" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string15">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="15" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string12">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="12" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string70">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="70" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string150">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="150" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string11">
+		<xsd:restriction base="xsd:unsignedLong">
+			<xsd:totalDigits value="11" />
+			<xsd:fractionDigits value="0" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!--
+		to delete full profile, including all child component entries, use
+		this attribute
+	-->
+	<xsd:attributeGroup name="deleteFullAttrGrp">
+		<xsd:attribute name="deleteFull" type="BooleanStr"
+			default="F" />
+	</xsd:attributeGroup>
+	<xsd:simpleType name="AuthLevelType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="A" />
+			<xsd:enumeration value="B" />
+			<xsd:enumeration value="E" />
+			<xsd:enumeration value="T" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="StatusType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="1" />
+			<xsd:enumeration value="2" />
+			<xsd:enumeration value="3" />
+			<xsd:enumeration value="4" />
+			<xsd:enumeration value="5" />
+			<xsd:enumeration value="6" />
+			<xsd:enumeration value="7" />
+			<xsd:enumeration value="8" />
+			<xsd:enumeration value="9" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CountryType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AL" />
+			<xsd:enumeration value="DZ" />
+			<xsd:enumeration value="AS" />
+			<xsd:enumeration value="AD" />
+			<xsd:enumeration value="AO" />
+			<xsd:enumeration value="AI" />
+			<xsd:enumeration value="AQ" />
+			<xsd:enumeration value="AG" />
+			<xsd:enumeration value="AR" />
+			<xsd:enumeration value="AM" />
+			<xsd:enumeration value="AW" />
+			<xsd:enumeration value="AU" />
+			<xsd:enumeration value="AT" />
+			<xsd:enumeration value="AZ" />
+			<xsd:enumeration value="BS" />
+			<xsd:enumeration value="BH" />
+			<xsd:enumeration value="BD" />
+			<xsd:enumeration value="BB" />
+			<xsd:enumeration value="BE" />
+			<xsd:enumeration value="BZ" />
+			<xsd:enumeration value="BJ" />
+			<xsd:enumeration value="BM" />
+			<xsd:enumeration value="BT" />
+			<xsd:enumeration value="BO" />
+			<xsd:enumeration value="BA" />
+			<xsd:enumeration value="BW" />
+			<xsd:enumeration value="BV" />
+			<xsd:enumeration value="BR" />
+			<xsd:enumeration value="IO" />
+			<xsd:enumeration value="BN" />
+			<xsd:enumeration value="BG" />
+			<xsd:enumeration value="BF" />
+			<xsd:enumeration value="BI" />
+			<xsd:enumeration value="BY" />
+			<xsd:enumeration value="KH" />
+			<xsd:enumeration value="CM" />
+			<xsd:enumeration value="CA" />
+			<xsd:enumeration value="CV" />
+			<xsd:enumeration value="KY" />
+			<xsd:enumeration value="CF" />
+			<xsd:enumeration value="TD" />
+			<xsd:enumeration value="CL" />
+			<xsd:enumeration value="CN" />
+			<xsd:enumeration value="CX" />
+			<xsd:enumeration value="CC" />
+			<xsd:enumeration value="CO" />
+			<xsd:enumeration value="KM" />
+			<xsd:enumeration value="CG" />
+			<xsd:enumeration value="CK" />
+			<xsd:enumeration value="CR" />
+			<xsd:enumeration value="CI" />
+			<xsd:enumeration value="HR" />
+			<xsd:enumeration value="CU" />
+			<xsd:enumeration value="CY" />
+			<xsd:enumeration value="CZ" />
+			<xsd:enumeration value="CS" />
+			<xsd:enumeration value="DK" />
+			<xsd:enumeration value="DJ" />
+			<xsd:enumeration value="DM" />
+			<xsd:enumeration value="DO" />
+			<xsd:enumeration value="TP" />
+			<xsd:enumeration value="EC" />
+			<xsd:enumeration value="EG" />
+			<xsd:enumeration value="SV" />
+			<xsd:enumeration value="GQ" />
+			<xsd:enumeration value="EE" />
+			<xsd:enumeration value="ET" />
+			<xsd:enumeration value="FK" />
+			<xsd:enumeration value="FO" />
+			<xsd:enumeration value="FJ" />
+			<xsd:enumeration value="FI" />
+			<xsd:enumeration value="FR" />
+			<xsd:enumeration value="GF" />
+			<xsd:enumeration value="PF" />
+			<xsd:enumeration value="TF" />
+			<xsd:enumeration value="GA" />
+			<xsd:enumeration value="GM" />
+			<xsd:enumeration value="GE" />
+			<xsd:enumeration value="DE" />
+			<xsd:enumeration value="GH" />
+			<xsd:enumeration value="GI" />
+			<xsd:enumeration value="GR" />
+			<xsd:enumeration value="GL" />
+			<xsd:enumeration value="GD" />
+			<xsd:enumeration value="GP" />
+			<xsd:enumeration value="GU" />
+			<xsd:enumeration value="GT" />
+			<xsd:enumeration value="GN" />
+			<xsd:enumeration value="GW" />
+			<xsd:enumeration value="GY" />
+			<xsd:enumeration value="HT" />
+			<xsd:enumeration value="HM" />
+			<xsd:enumeration value="HN" />
+			<xsd:enumeration value="HK" />
+			<xsd:enumeration value="HU" />
+			<xsd:enumeration value="IS" />
+			<xsd:enumeration value="IN" />
+			<xsd:enumeration value="ID" />
+			<xsd:enumeration value="IR" />
+			<xsd:enumeration value="IQ" />
+			<xsd:enumeration value="IE" />
+			<xsd:enumeration value="IL" />
+			<xsd:enumeration value="IT" />
+			<xsd:enumeration value="JM" />
+			<xsd:enumeration value="JP" />
+			<xsd:enumeration value="JO" />
+			<xsd:enumeration value="KZ" />
+			<xsd:enumeration value="KE" />
+			<xsd:enumeration value="KI" />
+			<xsd:enumeration value="KP" />
+			<xsd:enumeration value="KR" />
+			<xsd:enumeration value="KW" />
+			<xsd:enumeration value="KG" />
+			<xsd:enumeration value="LA" />
+			<xsd:enumeration value="LV" />
+			<xsd:enumeration value="LB" />
+			<xsd:enumeration value="LS" />
+			<xsd:enumeration value="LR" />
+			<xsd:enumeration value="LY" />
+			<xsd:enumeration value="LI" />
+			<xsd:enumeration value="LT" />
+			<xsd:enumeration value="LU" />
+			<xsd:enumeration value="MO" />
+			<xsd:enumeration value="MG" />
+			<xsd:enumeration value="MW" />
+			<xsd:enumeration value="MY" />
+			<xsd:enumeration value="MV" />
+			<xsd:enumeration value="ML" />
+			<xsd:enumeration value="MT" />
+			<xsd:enumeration value="MH" />
+			<xsd:enumeration value="MQ" />
+			<xsd:enumeration value="MR" />
+			<xsd:enumeration value="MU" />
+			<xsd:enumeration value="MX" />
+			<xsd:enumeration value="FM" />
+			<xsd:enumeration value="MD>" />
+			<xsd:enumeration value="MC" />
+			<xsd:enumeration value="MN" />
+			<xsd:enumeration value="MS" />
+			<xsd:enumeration value="MA" />
+			<xsd:enumeration value="MZ" />
+			<xsd:enumeration value="MM" />
+			<xsd:enumeration value="NA" />
+			<xsd:enumeration value="NR" />
+			<xsd:enumeration value="NP" />
+			<xsd:enumeration value="NL" />
+			<xsd:enumeration value="AN" />
+			<xsd:enumeration value="NT" />
+			<xsd:enumeration value="NC" />
+			<xsd:enumeration value="NZ" />
+			<xsd:enumeration value="NI" />
+			<xsd:enumeration value="NE" />
+			<xsd:enumeration value="NG" />
+			<xsd:enumeration value="NU" />
+			<xsd:enumeration value="NF" />
+			<xsd:enumeration value="MP" />
+			<xsd:enumeration value="NO" />
+			<xsd:enumeration value="OM" />
+			<xsd:enumeration value="PK" />
+			<xsd:enumeration value="PW" />
+			<xsd:enumeration value="PA" />
+			<xsd:enumeration value="PG" />
+			<xsd:enumeration value="PY" />
+			<xsd:enumeration value="PE" />
+			<xsd:enumeration value="PH" />
+			<xsd:enumeration value="PN" />
+			<xsd:enumeration value="PL" />
+			<xsd:enumeration value="PT" />
+			<xsd:enumeration value="PR" />
+			<xsd:enumeration value="QA" />
+			<xsd:enumeration value="RE" />
+			<xsd:enumeration value="RO" />
+			<xsd:enumeration value="RU" />
+			<xsd:enumeration value="RW" />
+			<xsd:enumeration value="SH" />
+			<xsd:enumeration value="KN" />
+			<xsd:enumeration value="LC" />
+			<xsd:enumeration value="PM" />
+			<xsd:enumeration value="VC" />
+			<xsd:enumeration value="WS" />
+			<xsd:enumeration value="SM" />
+			<xsd:enumeration value="ST" />
+			<xsd:enumeration value="SA" />
+			<xsd:enumeration value="SN" />
+			<xsd:enumeration value="SC" />
+			<xsd:enumeration value="SL" />
+			<xsd:enumeration value="SG" />
+			<xsd:enumeration value="SK" />
+			<xsd:enumeration value="SI" />
+			<xsd:enumeration value="SB" />
+			<xsd:enumeration value="SO" />
+			<xsd:enumeration value="ZA" />
+			<xsd:enumeration value="SP" />
+			<xsd:enumeration value="LK" />
+			<xsd:enumeration value="SD" />
+			<xsd:enumeration value="SR" />
+			<xsd:enumeration value="SJ" />
+			<xsd:enumeration value="SZ" />
+			<xsd:enumeration value="SE" />
+			<xsd:enumeration value="CH" />
+			<xsd:enumeration value="SY" />
+			<xsd:enumeration value="TW" />
+			<xsd:enumeration value="TJ" />
+			<xsd:enumeration value="TZ" />
+			<xsd:enumeration value="TH" />
+			<xsd:enumeration value="TG" />
+			<xsd:enumeration value="TK" />
+			<xsd:enumeration value="TO" />
+			<xsd:enumeration value="TT" />
+			<xsd:enumeration value="TN" />
+			<xsd:enumeration value="TR" />
+			<xsd:enumeration value="TM" />
+			<xsd:enumeration value="TC" />
+			<xsd:enumeration value="TV" />
+			<xsd:enumeration value="UG" />
+			<xsd:enumeration value="UA" />
+			<xsd:enumeration value="AE" />
+			<xsd:enumeration value="GB" />
+			<xsd:enumeration value="US" />
+			<xsd:enumeration value="UM" />
+			<xsd:enumeration value="UY" />
+			<xsd:enumeration value="UZ" />
+			<xsd:enumeration value="VU" />
+			<xsd:enumeration value="VA" />
+			<xsd:enumeration value="VE" />
+			<xsd:enumeration value="VN" />
+			<xsd:enumeration value="VG" />
+			<xsd:enumeration value="VI" />
+			<xsd:enumeration value="WF" />
+			<xsd:enumeration value="EH" />
+			<xsd:enumeration value="YE" />
+			<xsd:enumeration value="YU" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string35Base">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="35" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string24">
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value="[a-zA-Z0-9]{1,24}" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="hostId">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="35" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="accountNum">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="40" />
+			<xsd:pattern value="\d{3,10}|([A-Z]{2}\d{2}[A-Za-z0-9]{3,30})"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="bankCode">
+		<xsd:restriction base="xsd:token">
+			<xsd:maxLength value="12" />
+			<xsd:pattern value="\d{8}|([A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?)"></xsd:pattern>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="emailType">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="150" />
+			<xsd:pattern
+				value="([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(([a-zA-Z0-9_-])*\.([a-zA-Z0-9_-])+)+" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="TimeZoneType">
+		<xsd:restriction base="xsd:string">
+			<!-- (GMT-12:00) Eniwetok, Kwajalein -->
+			<xsd:enumeration value="-12" />
+<!-- (GMT-11:00) Midway Island, Samoa -->
+	<xsd:enumeration value="-11" />
+<!-- (GMT-10:00) Hawaii -->
+	<xsd:enumeration value="-10" />
+<!-- (GMT-09:00) Alaska -->
+	<xsd:enumeration value="-09" />
+<!-- (GMT-08:00) Pacific Time (US & Canada); Tijuana -->
+	<xsd:enumeration value="-08" />
+<!-- (GMT-07:00) Arizona -->
+	<xsd:enumeration value="-07" />
+<!-- (GMT-06:00) Central Time (US & Canada) -->
+	<xsd:enumeration value="-06" />
+<!-- (GMT-06:00) Central America -->
+	<xsd:enumeration value="-061" />
+<!-- (GMT-06:00) Mexico City -->
+	<xsd:enumeration value="-062" />
+<!-- (GMT-06:00) Saskatchewan -->
+	<xsd:enumeration value="-063" />
+<!-- (GMT-05:00) Eastern Time (US & Canada) -->
+	<xsd:enumeration value="-05" />
+<!-- (GMT-05:00) Bogota, Lima, Quito -->
+	<xsd:enumeration value="-051" />
+<!-- (GMT-05:00) Indiana (East) -->
+	<xsd:enumeration value="-052" />
+<!-- (GMT-04:00) Atlantic Time (Canada) -->
+	<xsd:enumeration value="-04" />
+<!-- (GMT-04:00) Caracas, La Paz -->
+	<xsd:enumeration value="-041" />
+<!-- (GMT-04:00) Santiago -->
+			<xsd:enumeration value="-042" />
+<!-- (GMT-03:00) Newfoundland -->
+			<xsd:enumeration value="-03" />
+<!-- (GMT-03:00) Brasilia -->
+			<xsd:enumeration value="-031" />
+<!-- (GMT-03:00) Buenos Aires, Georgetown -->
+			<xsd:enumeration value="-032" />
+<!-- (GMT-03:00) Greenland -->
+			<xsd:enumeration value="-033" />
+<!-- (GMT-02:00) Mid-Atlantic -->
+			<xsd:enumeration value="-02" />
+<!-- (GMT-01:00) Azores -->
+			<xsd:enumeration value="-01" />
+<!-- (GMT-01:00) Cape Verde Is. -->
+			<xsd:enumeration value="-011" />
+<!-- (GMT) Casablanca, Monrovia -->
+			<xsd:enumeration value="0" />
+<!-- (GMT) Greenwich Mean Time: Dublin, Edinburgh, Lisbon, London -->
+			<xsd:enumeration value="01" />
+<!-- (GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna -->
+			<xsd:enumeration value="+1" />
+<!-- (GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague -->
+			<xsd:enumeration value="+01" />
+<!-- (GMT+01:00) Brussels, Copenhagen, Madrid, Paris -->
+			<xsd:enumeration value="+011" />
+<!-- (GMT+01:00) Sarajevo, Skopje, Sofija, Vilnius, Warsaw, Zagreb -->
+			<xsd:enumeration value="+012" />
+<!-- (GMT+01:00) West Central Africa -->
+			<xsd:enumeration value="+013" />
+<!-- (GMT+02:00) Athens, Istanbul, Minsk -->
+			<xsd:enumeration value="+02" />
+<!-- (GMT+02:00) Bucharest, Cairo, Harare, Pretoria -->
+			<xsd:enumeration value="+021" />
+<!-- (GMT+02:00) Helsinki, Riga, Tallin, Jerusalem -->
+			<xsd:enumeration value="+022" />
+<!-- (GMT+03:00) Baghdad, Kuwait, Riyadh -->
+			<xsd:enumeration value="+03" />
+<!-- (GMT+03:00) Moscow, St. Petersburg, Volgograd -->
+			<xsd:enumeration value="+031" />
+<!-- (GMT+03:00) Nairobi, Tehran -->
+			<xsd:enumeration value="+033" />
+<!-- (GMT+04:00) Abu Dhabi, Muscat -->
+			<xsd:enumeration value="+04" />
+<!-- (GMT+04:00) Baku, Tbilisi, Yerevan, Kabul -->
+			<xsd:enumeration value="+041" />
+<!-- (GMT+05:00) Ekaterinburg -->
+			<xsd:enumeration value="+05" />
+<!-- (GMT+05:00) Islamabad, Karachi, Tashkent -->
+			<xsd:enumeration value="+051" />
+<!-- (GMT+05:30) Calcutta, Chennai, Mumbai, New Delhi -->
+			<xsd:enumeration value="+0530" />
+<!-- (GMT+05:45) Kathmandu -->
+			<xsd:enumeration value="+0545" />
+<!-- (GMT+06:00) Almaty, Novosibirsk -->
+			<xsd:enumeration value="+06" />
+<!-- (GMT+06:00) Astana, Dhaka, Sri Jayawardenepura -->
+			<xsd:enumeration value="+061" />
+<!-- (GMT+06:30) Rangoon -->
+			<xsd:enumeration value="+0630" />
+<!-- (GMT+07:00) Bangkok, Hanoi, Jakarta -->
+			<xsd:enumeration value="+07" />
+<!-- (GMT+07:00) Krasnojarsk -->
+			<xsd:enumeration value="+71" />
+<!-- (GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi -->
+			<xsd:enumeration value="+08" />
+<!-- (GMT+08:00) Irkutsk, Ulaan Bataar -->
+			<xsd:enumeration value="+081" />
+<!-- (GMT+08:00) Kuala Lumpur, Singapore -->
+			<xsd:enumeration value="+082" />
+<!-- (GMT+08:00) Perth, Taipei -->
+			<xsd:enumeration value="+083" />
+<!-- (GMT+09:00) Osaka, Sapporo, Tokyo -->
+			<xsd:enumeration value="+09" />
+<!-- (GMT+09:00) Seoul, Yakutsk -->
+			<xsd:enumeration value="+091" />
+<!-- (GMT+09:30) Adelaide, Darwin -->
+			<xsd:enumeration value="+0930" />
+<!-- (GMT+10:00) Brisbane, Canberra, Melbourne, Sydney -->
+			<xsd:enumeration value="+10" />
+<!-- (GMT+10:00) Guam, Port Moresby, Hobart, Vladivostok -->
+			<xsd:enumeration value="+101" />
+<!-- (GMT+11:00) Magadan, Solomon Is., New Caledonia -->
+			<xsd:enumeration value="+11" />
+<!-- (GMT+12:00) Fiji, Kamchatka, Marshall Is. -->
+			<xsd:enumeration value="+12" />
+<!-- (GMT+13:00) Nuku'alofa -->
+			<xsd:enumeration value="+13" />
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

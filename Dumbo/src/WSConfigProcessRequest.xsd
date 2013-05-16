@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="unqualified"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.ibm.com/b2b/apiint/messagedefinitions/messages/xml/wsConfigProcessRequest"
+	xmlns="http://www.ibm.com/b2b/apiint/messagedefinitions/messages/xml/wsConfigProcessRequest"
+	xmlns:baseConfig="http://www.ibm.com/b2b/apiint/messagedefinitions/messages/xml/baseWSConfig">
+
+	<xs:import schemaLocation="BaseWSConfig.xsd"
+		namespace="http://www.ibm.com/b2b/apiint/messagedefinitions/messages/xml/baseWSConfig" />
+		
+	<xs:element name="WSConfiguration" type="WSConfigurationType" />
+	
+	<xs:complexType name="WSConfigurationType">
+		<xs:complexContent>
+			<xs:extension base="baseConfig:BaseWSConfig">
+				<xs:sequence>
+					<xs:element type="xs:string" name="wsdlxml" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>
