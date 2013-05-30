@@ -5,6 +5,7 @@ import java.util.List;
 
 
 public class AnyTest {
+	@SuppressWarnings("unused")
 	private static String createStringForServerAliases( List<String> serverKeyAliases ) {
         if(serverKeyAliases != null && serverKeyAliases.size() > 0){
             StringBuilder sb = new StringBuilder();
