@@ -21,7 +21,6 @@ public class ThreeSumImproved1 {
 					start = binarySearch + 1;
 				}
 			}
-
 		}
 		return count;
 

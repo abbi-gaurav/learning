@@ -18,20 +18,18 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.ibm.security.util.DerValue;
-import com.ibm.security.x509.CRLDistributionPointsExtension;
-import com.ibm.security.x509.DistributionPoint;
-import com.ibm.security.x509.GeneralName;
-import com.ibm.security.x509.GeneralNameInterface;
-import com.ibm.security.x509.GeneralNames;
-import com.ibm.security.x509.GeneralNamesException;
+import sun.security.util.DerValue;
+import sun.security.x509.CRLDistributionPointsExtension;
+import sun.security.x509.DistributionPoint;
+import sun.security.x509.GeneralName;
+import sun.security.x509.GeneralNameInterface;
 
 public class TestCRLVerification {
 	private static final String CRL_DATA_STREAM = "/home/gaurav_abbi/official/meg/identity/data/CRLDataStream";
 	private static final String URI_NAME = "URIName:";
 	private static final String CERT_FILE = "/home/gaurav_abbi/official/meg/identity/data/DigiNotarCyberCA.der";
 
-	public static void main(String[] args) throws CertificateException, IOException, CRLException, GeneralNamesException {
+	public static void main(String[] args) throws CertificateException, IOException, CRLException {
 		TestCRLVerification worker = new TestCRLVerification();
 		X509Certificate x509Certificate = worker.getX509Cert();
 //		String uriValue = worker.getUri(x509Certificate);
@@ -106,16 +104,19 @@ public class TestCRLVerification {
 		return uriAfterPreficx;
 	}
 	
-	private List<String> getUri2(X509Certificate cert) throws IOException, GeneralNamesException{
+	private List<String> getUri2(X509Certificate cert) throws IOException{
 		List<String> generalNames = new ArrayList<String>();
 		byte[] crlUrlBytes = cert.getExtensionValue("2.5.29.31");
 		DerValue derValue = new DerValue(crlUrlBytes);
 		CRLDistributionPointsExtension ce = new CRLDistributionPointsExtension(false,derValue.getOctetString());
-		DistributionPoint[] dpts = ce.getDistributionPoints();
+		//TODO:: FIX this
+//		DistributionPoint[] dpts = ce.getDistributionPoints();
+		DistributionPoint[] dpts = null;
 		for(DistributionPoint dp: dpts){
-			GeneralNames gns = (GeneralNames) dp.getName();
-			GeneralName gName = gns.getGeneralName(GeneralNameInterface.NAME_URI);
-			GeneralNameInterface uriName = gName.getName();
+//			GeneralNames gns = (GeneralNames) dp.getName();
+//			GeneralName gName = gns.getGeneralName(GeneralNameInterface.NAME_URI);
+//			GeneralNameInterface uriName = gName.getName();
+			GeneralNameInterface uriName = null;
 			String uriNameStr = uriName.toString();
 			System.out.println(uriNameStr);
 			String urlValue = extractURL(uriNameStr);

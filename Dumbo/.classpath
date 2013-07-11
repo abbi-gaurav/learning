@@ -3,6 +3,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/JettyTest"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/myLib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/osLib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/unitTest"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/axis2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jms"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/logging"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
