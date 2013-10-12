@@ -18,6 +18,11 @@ import coursera.alg1.lect4.HeapsortTest;
 		/*InsertionSortTest.class, SelectionSortTest.class,*/ 
 		BUMergeSortTest.class, QuickSortTest.class, ThreeWayQuickSortTest.class,
 		HeapsortTest.class})
+/**
+ * a sample comment
+ * @author gabbi
+ *
+ */
 public class SortTesterSuite {
 	
 	public static Collection<Object[]> getCounts() {
