@@ -29,7 +29,7 @@ public class HttpTransportListener implements TransportListener {
 	public HttpTransportListener(int port) throws FileNotFoundException, SAXException, IOException, Exception {
 		Map<String, Class<? extends HttpServlet>> map = new HashMap<String, Class<? extends HttpServlet>>();
 		map.put("/service1", HttpListenerServlet.class);
-		JettyServerParameters params = new JettyServerParameters(port, -1,"/jettyAsyncResponse", map, null, false);
+		JettyServerParameters params = new JettyServerParameters(port, -1,"/jettyAsyncResponse", map);
 		
 		this.jettyServer = new MyServer(params);
 		jettyServer.start();
